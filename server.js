@@ -2,10 +2,10 @@ const restify = require('restify'),
 	server = restify.createServer(),
 	http = require('http'),
 	basicResponse = function(req, res, next) {
-		reply.setHeader('content-type', 'text/html');
-		reply.write('Foo');
+		res.setHeader('content-type', 'text/html');
+		res.write('Foo');
 
-		reply.end();
+		res.end();
 		next();
 	}
 
