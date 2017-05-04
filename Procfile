@@ -1,1 +1,1 @@
-web: node server.js -PORT $PORT
+web: node server.js
