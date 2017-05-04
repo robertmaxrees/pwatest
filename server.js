@@ -15,6 +15,6 @@ server.use(restify.CORS());
 server.use(restify.queryParser());
 server.use(restify.gzipResponse());
 server.get('/', basicResponse);
-server.listen(port, function() {
+server.listen(80, function() {
 	console.log('%s listening at %s', server.name, server.url);
 });
