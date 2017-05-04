@@ -64,6 +64,16 @@ server.register(require('inert'), (err) => {
 	});
 });
 
+server.route({
+	method: 'POST',
+	path: '/setUserFCM',
+	handler: function(request) {
+		//request.yar.set('fcmEndpoint', request.payload.fcmEndpoint);
+		console.log(request);
+		return 'success';
+	}
+});
+
 server.register({
 	register: require('yar'),
 	options: {

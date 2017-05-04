@@ -12,29 +12,46 @@
 		console.log('Activated', event);
 	});
 
+	// self.addEventListener('push', function(event) {
+	// 	console.log('Push message', event);
+
+	// 	var title = 'Push message';
+
+	// 	var httpHeaders = new Headers();
+	// 	httpHeaders.append('pragma', 'no-cache');
+	// 	httpHeaders.append('cache-control', 'no-cache');
+
+	// 	var fetchInit = {
+	// 		method: 'GET',
+	// 		headers: httpHeaders,
+	// 	};
+
+	// 	event.waitUntil(
+	// 		fetch("/app/api/notifications/latest.json", fetchInit).then(function(res) {
+	// 			return res.json().then(function(notificationData) {
+	// 				link = notificationData.link;
+	// 				self.registration.showNotification(notificationData.title, {
+	// 					'body': notificationData.body,
+	// 					'icon': notificationData.icon
+	// 				});
+	// 			})
+	// 		})
+	// 	);
+	// });
+
 	self.addEventListener('push', function(event) {
-		console.log('Push message', event);
+		console.log('Received a push message', event);
 
-		var title = 'Push message';
-
-		var httpHeaders = new Headers();
-		httpHeaders.append('pragma', 'no-cache');
-		httpHeaders.append('cache-control', 'no-cache');
-
-		var fetchInit = {
-			method: 'GET',
-			headers: httpHeaders,
-		};
+		var title = 'Yay a message.';
+		var body = 'We have received a push message.';
+		var icon = '/images/icon-192x192.png';
+		var tag = 'simple-push-demo-notification-tag';
 
 		event.waitUntil(
-			fetch("/app/api/notifications/latest.json", fetchInit).then(function(res) {
-				return res.json().then(function(notificationData) {
-					link = notificationData.link;
-					self.registration.showNotification(notificationData.title, {
-						'body': notificationData.body,
-						'icon': notificationData.icon
-					});
-				})
+			self.registration.showNotification(title, {
+				body: body,
+				icon: icon,
+				tag: tag
 			})
 		);
 	});
