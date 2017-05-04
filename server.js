@@ -24,6 +24,14 @@ server.register(require('inert'), (err) => {
 
 	server.route({
 		method: 'GET',
+		path: '/favicon.ico',
+		handler: function(request, reply) {
+			reply.file('./img/favicon.ico');
+		}
+	});
+
+	server.route({
+		method: 'GET',
 		path: '/manifest.json',
 		handler: {
 			file: function(request) {
