@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/robertmaxrees/pwatest/issues"
   },
-  "homepage": "https://github.com/robertmaxrees/pwatest#readme"
+  "homepage": "https://github.com/robertmaxrees/pwatest#readme",
+  "dependencies": {
+    "restify": "^4.3.0"
+  }
 }
+0
