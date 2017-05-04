@@ -1,0 +1,19 @@
+{
+  "name": "pwatest",
+  "version": "0.0.1",
+  "description": "A simple PWA test for my own fun and profit",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robertmaxrees/pwatest.git"
+  },
+  "author": "Robert Max Rees, II",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/robertmaxrees/pwatest/issues"
+  },
+  "homepage": "https://github.com/robertmaxrees/pwatest#readme"
+}
