@@ -1,9 +1,11 @@
 {
-	"short_name": "Gh0st App",
-	"name": "Gh0st's Test Application",
+	"short_name": "Test PWA App",
+	"name": "My Test PWA Application",
 	"gcm_sender_id": "1085538655921",
 	"display": "standalone",
 	"start_url": "/",
+	"background_color": "#000",
+  "Theme_color": "#00FF00",
 	"icons": [{
 	  "src": "img/144.png",
 	  "sizes": "144x144",
