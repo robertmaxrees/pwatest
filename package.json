@@ -16,6 +16,7 @@
   "dependencies": {
     "hapi": "^16.1.1",
     "inert": "^4.2.0",
+    "web-push": "^3.2.2",
     "wreck": "^12.1.0",
     "yar": "^8.1.2"
   }

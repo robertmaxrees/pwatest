@@ -1,0 +1,22 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+h1 {
+	padding-bottom: 15px;
+}
+
+label, input, textarea {
+	display: block;
+	width: 350px;
+}
+
+label {
+	padding-bottom: 15px;
+}
+
+main {
+	width: 980px;
+	margin: 0 auto;
+}

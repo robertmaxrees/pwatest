@@ -3,16 +3,14 @@
 		navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function() {
 			return navigator.serviceWorker.ready;
 		}).then((registration) => {
-			registration.pushManager.subscribe({ userVisibleOnly: true }).then(function(sub) {
-				const endpointSections = sub.endpoint.split('/'),
-					fcmSubscriptionId = endpointSections[endpointSections.length - 1],
-					xhr = new XMLHttpRequest();
+			registration.pushManager.subscribe({ userVisibleOnly: true }).then(function(subscription) {
+				const xhr = new XMLHttpRequest();
 
 				xhr.open('POST', '/setuserfcm');
 				xhr.send(JSON.stringify({
-					fcmSubscriptionId: fcmSubscriptionId
+					fcmSubscriptionData: subscription
 				}));
-				console.log('endpoint:', fcmSubscriptionId);
+				console.log('endpoint:', subscription);
 			});
 		}).catch((err) => console.error(err));
 		navigator.serviceWorker.ready.then(function(registration) {
@@ -24,11 +22,16 @@
 	}
 
 	document.addEventListener("DOMContentLoaded", function() {
-		window.addEventListener(document.querySelector('button'), () => {
-			const xhr = new XMLHttpRequest();
+		console.log(document.querySelector('button'));
+		document.querySelector('button').addEventListener('click', () => {
+			const xhr = new XMLHttpRequest(),
+				postData = {
+					title: document.querySelector('.notification-title').value,
+					text: document.querySelector('.notification-body').value
+				}
 
-			xhr.open('GET', '/sendfcmnotification');
-			xhr.send();
+			xhr.open('POST', '/sendfcmnotification');
+			xhr.send(JSON.stringify(postData));
 		});
 	});
 }());

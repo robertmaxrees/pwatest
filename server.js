@@ -1,9 +1,11 @@
 const Path = require('path'),
 	Hapi = require('hapi'),
-	wreck = require('wreck');
+	wreck = require('wreck'),
+	webPush = require('web-push')
 
-const fcmEndpointURL = 'https://fcm.googleapis.com/fcm/send',
-	fcmAPIKey = process.env.fcmapikey;
+const fcmEndpointURL = 'https://fcm.googleapis.com/fcm/send';
+
+webPush.setGCMAPIKey(process.env.fcmapikey);
 
 const server = new Hapi.Server({
 	connections: {
@@ -82,10 +84,11 @@ server.route({
 	method: 'POST',
 	path: '/setuserfcm',
 	handler: function(request, reply) {
-		requestPayload = JSON.parse(request.payload);
-		request.yar.set('fcmSubscriptionId', requestPayload.fcmSubscriptionId);
+		const requestPayload = JSON.parse(request.payload).fcmSubscriptionData;
 
-		reply(request.yar.get('fcmSubscriptionId'));
+		request.yar.set('fcmSubscriptionData', requestPayload);
+
+		reply(request.yar.get('fcmSubscriptionData'));
 	}
 });
 
@@ -93,33 +96,26 @@ server.route({
 	method: 'GET',
 	path: '/getuserfcm',
 	handler: function(request, reply) {
-		console.log(request.yar.get('fcmSubscriptionId'));
-		reply(request.yar.get('fcmSubscriptionId'));
+		reply(request.yar.get('fcmSubscriptionData'));
 	}
 });
 
 server.route({
-	method: 'GET',
+	method: 'POST',
 	path: '/sendfcmnotification',
 	handler: function(request, reply) {
-		const fcmSubscriptionId = request.yar.get('fcmSubscriptionId'),
-			options = {
-				headers: {
-					'Authorization': 'key=' + fcmAPIKey,
-					'Content-Type': 'application/json'
-				},
-				payload: {
-					"to": fcmSubscriptionId
-				}
+		const fcmSubscriptionData = request.yar.get('fcmSubscriptionData'),
+			requestPayload = JSON.parse(request.payload);
+			payloadTitle = requestPayload.title || 'GIMME A TITLE, JERK',
+			payloadBody = requestPayload.text || 'GIMME SOME TEXT, JERK',
+			payload = {
+				title: payloadTitle,
+				body: payloadBody
 			};
 
-		wreck.request('POST', fcmEndpointURL, options, (err, response) => {
-			wreck.read(response, {json: 'force'}, (err, body) => {
-				console.log(body);
-			});
-			reply('success');
-		});
+		webPush.sendNotification(fcmSubscriptionData, JSON.stringify(payload))
 
+		reply('success');
 	}
 });
 

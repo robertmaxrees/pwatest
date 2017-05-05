@@ -13,12 +13,12 @@
 	});
 
 	this.addEventListener('push', (event) => {
-		console.log('Received a push message', event);
-
-		var title = 'Yay a message.';
-		var body = 'We have received a push message.';
-		var icon = '/img/192.png';
-		var tag = 'simple-push-demo-notification-tag';
+		const payload = event.data.json();
+		console.log(payload);
+		var title = payload.title,
+			body = payload.body,
+			icon = '/img/192.png',
+			tag = 'simple-push-demo-notification-tag';
 
 		event.waitUntil(
 			this.registration.showNotification(title, {
