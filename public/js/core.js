@@ -14,9 +14,8 @@
 					}).then(function(subscription) {
 						// The subscription was successful
 						const xhr = new XMLHttpRequest();
-
-						xhr.open('POST', '/setUserFCM');
-						xhr.setRequestHeader("Content-Type", "application/json");
+						JSON.stringify(subscription);
+						xhr.open('POST', '/setuserfcm');
 						xhr.send(subscription);
 					})
 						.catch(function(e) {

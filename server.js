@@ -16,6 +16,15 @@ server.connection({
 	host: '0.0.0.0'
 });
 
+server.register({
+	register: require('yar'),
+	options: {
+		cookieOptions: {
+			password: process.env.yarpass,
+		}
+	}
+}, function(err) { });
+
 server.register(require('inert'), (err) => {
 	server.route({
 		method: 'GET',
@@ -66,22 +75,23 @@ server.register(require('inert'), (err) => {
 
 server.route({
 	method: 'POST',
-	path: '/setUserFCM',
-	handler: function(request) {
-		//request.yar.set('fcmEndpoint', request.payload.fcmEndpoint);
-		console.log(request);
-		return 'success';
+	path: '/setuserfcm',
+	handler: function(request, reply) {
+		requestPayload = JSON.parse(request.payload);
+		request.yar.set('fcmSubscriptionId', requestPayload.fcmSubscriptionId);
+
+		reply(request.yar.get('fcmSubscriptionId'));
 	}
 });
 
-server.register({
-	register: require('yar'),
-	options: {
-		cookieOptions: {
-			password: process.env.yarpass,
-		}
+server.route({
+	method: 'GET',
+	path: '/getuserfcm',
+	handler: function(request, reply) {
+		console.log(request.yar.get('fcmSubscriptionId'));
+		reply(request.yar.get('fcmSubscriptionId'));
 	}
-}, function(err) { });
+});
 
 server.start((err) => {
 	if (err) {
