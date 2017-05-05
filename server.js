@@ -21,6 +21,7 @@ server.register({
 	options: {
 		cookieOptions: {
 			password: process.env.yarpass,
+			isSecure: !process.env.isdev
 		}
 	}
 }, function(err) { });
