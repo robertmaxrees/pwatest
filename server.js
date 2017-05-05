@@ -1,7 +1,7 @@
 const Path = require('path'),
 	Hapi = require('hapi'),
 	wreck = require('wreck'),
-	webPush = require('web-push')
+	webPush = require('web-push');
 
 const fcmEndpointURL = 'https://fcm.googleapis.com/fcm/send';
 

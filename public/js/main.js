@@ -10,19 +10,19 @@
 				xhr.send(JSON.stringify({
 					fcmSubscriptionData: subscription
 				}));
-				console.log('endpoint:', subscription);
+				// console.log('endpoint:', subscription);
 			});
 		}).catch((err) => console.error(err));
 		navigator.serviceWorker.ready.then(function(registration) {
-			console.log('Service Worker Ready');
+			// console.log('Service Worker Ready');
 		});
 	} else {
-		console.warn('Push messaging is not supported');
+		// console.warn('Push messaging is not supported');
 		pushButton.textContent = 'Push Not Supported';
 	}
 
 	document.addEventListener("DOMContentLoaded", function() {
-		console.log(document.querySelector('button'));
+		//console.log(document.querySelector('button'));
 		document.querySelector('button').addEventListener('click', () => {
 			const xhr = new XMLHttpRequest(),
 				postData = {
