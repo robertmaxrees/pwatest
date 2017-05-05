@@ -1,45 +1,18 @@
 (function() {
-	console.log('Started', self);
+	console.log('Started', this);
 
 	var link;
 
-	self.addEventListener('install', function(event) {
-		self.skipWaiting();
+	this.addEventListener('install', (event) => {
+		this.skipWaiting();
 		console.log('Installed', event);
 	});
 
-	self.addEventListener('activate', function(event) {
+	this.addEventListener('activate', (event) => {
 		console.log('Activated', event);
 	});
 
-	// self.addEventListener('push', function(event) {
-	// 	console.log('Push message', event);
-
-	// 	var title = 'Push message';
-
-	// 	var httpHeaders = new Headers();
-	// 	httpHeaders.append('pragma', 'no-cache');
-	// 	httpHeaders.append('cache-control', 'no-cache');
-
-	// 	var fetchInit = {
-	// 		method: 'GET',
-	// 		headers: httpHeaders,
-	// 	};
-
-	// 	event.waitUntil(
-	// 		fetch("/app/api/notifications/latest.json", fetchInit).then(function(res) {
-	// 			return res.json().then(function(notificationData) {
-	// 				link = notificationData.link;
-	// 				self.registration.showNotification(notificationData.title, {
-	// 					'body': notificationData.body,
-	// 					'icon': notificationData.icon
-	// 				});
-	// 			})
-	// 		})
-	// 	);
-	// });
-
-	self.addEventListener('push', function(event) {
+	this.addEventListener('push', (event) => {
 		console.log('Received a push message', event);
 
 		var title = 'Yay a message.';
@@ -48,7 +21,7 @@
 		var tag = 'simple-push-demo-notification-tag';
 
 		event.waitUntil(
-			self.registration.showNotification(title, {
+			this.registration.showNotification(title, {
 				body,
 				icon,
 				tag
@@ -56,7 +29,7 @@
 		);
 	});
 
-	self.addEventListener('notificationclick', function(event) {
+	this.addEventListener('notificationclick', function(event) {
 		console.log('Notification click: tag', event.notification.tag);
 		// Android doesn't close the notification when you click it
 		// See http://crbug.com/463146

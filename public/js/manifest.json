@@ -1,7 +1,7 @@
 {
 	"short_name": "Gh0st App",
 	"name": "Gh0st's Test Application",
-	"gcm_sender_id": "103953800507",
+	"gcm_sender_id": "1085538655921",
 	"display": "standalone",
 	"start_url": "/",
 	"icons": [{

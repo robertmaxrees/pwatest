@@ -1,5 +1,9 @@
 const Path = require('path'),
-	Hapi = require('hapi');
+	Hapi = require('hapi'),
+	wreck = require('wreck');
+
+const fcmEndpointURL = 'https://fcm.googleapis.com/fcm/send',
+	fcmAPIKey = process.env.fcmapikey;
 
 const server = new Hapi.Server({
 	connections: {
@@ -91,6 +95,31 @@ server.route({
 	handler: function(request, reply) {
 		console.log(request.yar.get('fcmSubscriptionId'));
 		reply(request.yar.get('fcmSubscriptionId'));
+	}
+});
+
+server.route({
+	method: 'GET',
+	path: '/sendfcmnotification',
+	handler: function(request, reply) {
+		const fcmSubscriptionId = request.yar.get('fcmSubscriptionId'),
+			options = {
+				headers: {
+					'Authorization': 'key=' + fcmAPIKey,
+					'Content-Type': 'application/json'
+				},
+				payload: {
+					"to": fcmSubscriptionId
+				}
+			};
+
+		wreck.request('POST', fcmEndpointURL, options, (err, response) => {
+			wreck.read(response, {json: 'force'}, (err, body) => {
+				console.log(body);
+			});
+			reply('success');
+		});
+
 	}
 });
 

@@ -17,14 +17,13 @@
 						JSON.stringify(subscription);
 						xhr.open('POST', '/setuserfcm');
 						xhr.send(subscription);
-					})
-						.catch(function(e) {
-							if (Notification.permission === 'denied') {
-								console.warn('Permission for Notifications was denied');
-							} else {
-								console.error('Unable to subscribe to push.', e);
-							}
-						});
+					}).catch(function(e) {
+						if (Notification.permission === 'denied') {
+							console.warn('Permission for Notifications was denied');
+						} else {
+							console.error('Unable to subscribe to push.', e);
+						}
+					});
 				});
 
 				window.swRegistration = swReg;
