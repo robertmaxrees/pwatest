@@ -1,11 +1,12 @@
 {
-	"short_name": "Test PWA App",
-	"name": "My Test PWA Application",
+	"short_name": "Test PWA",
+	"name": "My Test PWA",
+	"version": "0.0.5",
 	"gcm_sender_id": "1085538655921",
 	"display": "standalone",
 	"start_url": "/",
 	"background_color": "#000",
-  "Theme_color": "#00FF00",
+  "theme_color": "#00FF00",
 	"icons": [{
 	  "src": "img/144.png",
 	  "sizes": "144x144",

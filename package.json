@@ -1,6 +1,6 @@
 {
   "name": "pwatest",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "A simple PWA test for my own fun and profit",
   "main": "server.js",
   "repository": {
