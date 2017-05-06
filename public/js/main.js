@@ -3,6 +3,7 @@
 		navigator.serviceWorker.register('/sw.js', { scope: '/' }).then(function() {
 			return navigator.serviceWorker.ready;
 		}).then((registration) => {
+			registration.update();
 			registration.pushManager.subscribe({ userVisibleOnly: true }).then(function(subscription) {
 				const xhr = new XMLHttpRequest();
 
@@ -23,11 +24,15 @@
 
 	document.addEventListener("DOMContentLoaded", function() {
 		//console.log(document.querySelector('button'));
-		document.querySelector('button').addEventListener('click', () => {
+		document.querySelector('form').addEventListener('submit', (e) => {
+			e.preventDefault();
+
 			const xhr = new XMLHttpRequest(),
 				postData = {
 					title: document.querySelector('.notification-title').value,
+					icon: document.querySelector('.notification-icon').value,
 					text: document.querySelector('.notification-body').value
+
 				}
 
 			xhr.open('POST', '/sendfcmnotification');

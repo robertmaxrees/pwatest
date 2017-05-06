@@ -107,9 +107,11 @@ server.route({
 		const fcmSubscriptionData = request.yar.get('fcmSubscriptionData'),
 			requestPayload = JSON.parse(request.payload);
 			payloadTitle = requestPayload.title || 'GIMME A TITLE, JERK',
-			payloadBody = requestPayload.text || 'GIMME SOME TEXT, JERK',
+			payloadIcon = requestPayload.icon || '/img/192.png',
+			payloadBody = requestPayload.text || 'GIMME SOME TEXT, JERK'
 			payload = {
 				title: payloadTitle,
+				icon: payloadIcon,
 				body: payloadBody
 			};
 

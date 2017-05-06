@@ -1,26 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
-		<title>A Playground</title>
 		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+		<title>Gh0st_Preacher's zer0space</title>
+
 		<link rel="manifest" href="/manifest.json">
-		<script type="application/javascript" src="js/main.js"></script>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 		<link href="css/style.css" rel="stylesheet">
 	</head>
 
 	<body>
-		<main>
-			<h1>lol this page</h1>
+		<main class="container">
+			<header class="row">
+				<h1 class="col-sm-12 text-center">lol this page</h1>
+			</header>
 
-			<label>Notification title:
-				<input type="text" class="notification-title">
-			</label>
-			<label>Notification body:
-				<textarea class="notification-body"></textarea>
-			</label>
-			<button>clicky</button>
+			<section class="row">
+				<form class="col-sm-12">
+					<div class="form-group">
+						<label>Notification title:</label>
+							<input type="text" class="notification-title form-control">
+					</div>
+					<div class="form-group">
+						<label>Notification icon:</label>
+							<input type="text" class="notification-icon form-control">
+					</div>
+					<div class="form-group">
+						<label>Notification body:</label>
+							<textarea class="notification-body form-control" rows="3"></textarea>
+					</div>
+					<button type="submit" class="btn btn-default">Clicky</button>
+				</form>
 			</section>
 		</main>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script type="application/javascript" src="js/main.js"></script>
 	</body>
 
 </html>
