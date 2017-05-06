@@ -20,18 +20,58 @@
 	});
 
 	this.addEventListener('install', function(event) {
-		event.waitUntil(
-			caches.open('0.0.5a').then(function(cache) {
-				return cache.addAll([
-					'/',
-					'/css/bootstrap.min.css',
-					'/css/bootstrap-theme.min.css',
-					'/css/style.css',
-					'/js/jquery.min.js',
-					'/js/bootstrap.min.js',
-					'/js/main.js'
-				]);
-			})
-		);
+
+		// all urls will be added to cache
+		function cacheAssets(assets) {
+			return new Promise(function(resolve, reject) {
+				// open cache
+				caches.open('0.0.5b')
+					.then(cache => {
+						// the API does all the magic for us
+						cache.addAll(assets)
+							.then(() => {
+								console.log('all assets added to cache')
+								resolve()
+							})
+							.catch(err => {
+								console.log('error when syncing assets', err)
+								reject()
+							})
+					}).catch(err => {
+						console.log('error when opening cache', err)
+						reject()
+					})
+			});
+		}
+
+		var assets = [
+			'/css/bootstrap.min.css',
+			'/css/bootstrap-theme.min.css',
+			'/css/style.css',
+			'/js/jquery.min.js',
+			'/js/bootstrap.min.js',
+			'/js/main.js'
+		];
+
+		cacheAssets(assets).then(() => {
+			console.log('All assets cached')
+		});
+
+	});
+
+	// this is the service worker which intercepts all http requests
+	self.addEventListener('fetch', function fetcher(event) {
+		var request = event.request;
+		// check if request
+		if (request.url.indexOf('/css') > -1 || request.url.indexOf('/js') > -1) {
+			// contentful asset detected
+			event.respondWith(
+				caches.match(event.request).then(function(response) {
+					// return from cache, otherwise fetch from network
+					return response || fetch(request);
+				})
+			);
+		}
+		// otherwise: ignore event
 	});
 }());

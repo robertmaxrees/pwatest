@@ -39,5 +39,6 @@
 			xhr.send(JSON.stringify(postData));
 		});
 	});
+
 }());
 
