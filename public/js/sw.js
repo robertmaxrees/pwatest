@@ -1,6 +1,4 @@
 (function() {
-	var link;
-
 	this.addEventListener('push', (event) => {
 		const payload = event.data.json(),
 			title = payload.title,
@@ -19,5 +17,21 @@
 
 	this.addEventListener('notificationclick', function(event) {
 		event.notification.close();
+	});
+
+	this.addEventListener('install', function(event) {
+		event.waitUntil(
+			caches.open('0.0.5a').then(function(cache) {
+				return cache.addAll([
+					'/',
+					'/css/bootstrap.min.css',
+					'/css/bootstrap-theme.min.css',
+					'/css/style.css',
+					'/js/jquery.min.js',
+					'/js/bootstrap.min.js',
+					'/js/main.js'
+				]);
+			})
+		);
 	});
 }());
