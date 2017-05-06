@@ -25,7 +25,7 @@
 		function cacheAssets(assets) {
 			return new Promise(function(resolve, reject) {
 				// open cache
-				caches.open('0.0.5b')
+				caches.open('0.0.5c')
 					.then(cache => {
 						// the API does all the magic for us
 						cache.addAll(assets)
