@@ -46,6 +46,7 @@
 
 		var assets = [
 			'/',
+			'/manifest.json',
 			'/css/bootstrap.min.css',
 			'/css/bootstrap-theme.min.css',
 			'/css/style.css',
