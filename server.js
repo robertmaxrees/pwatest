@@ -1,10 +1,14 @@
 const Path = require('path'),
 	Hapi = require('hapi'),
-	jwt = require('hapi-auth-jwt2'),
-	jwksRsa = require('jwks-rsa'),
 	inert = require('inert'),
 	wreck = require('wreck'),
-	webPush = require('web-push');
+	webPush = require('web-push'),
+	auth0 = require('auth0');
+
+const webAuth = new auth0.ManagementClient({
+	domain: 'app67857757.auth0.com',
+	clientID: 'jtJn1HVRrMalqPaa1Uxu19Flza3dpm13'
+});
 
 const fcmEndpointURL = 'https://fcm.googleapis.com/fcm/send';
 
@@ -20,6 +24,7 @@ const validateUser = (decoded, request, callback) => {
 }
 
 webPush.setGCMAPIKey(process.env.fcmapikey);
+
 
 const server = new Hapi.Server({
 	connections: {
@@ -46,26 +51,7 @@ server.register({
 	}
 }, function(err) { });
 
-server.register([inert, jwt], (err) => {
-  if (err) throw err;
-  server.auth.strategy('jwt', 'jwt', 'required', {
-    complete: true,
-    // verify the access token against the
-    // remote Auth0 JWKS
-    key: jwksRsa.hapiJwt2Key({
-      cache: true,
-      rateLimit: true,
-      jwksRequestsPerMinute: 5,
-      jwksUri: `https://${process.env.AUTH0_DOMAIN}/.well-known/jwks.json`
-    }),
-    verifyOptions: {
-      audience: process.env.AUTH0_AUDIENCE,
-      issuer: `https://${process.env.AUTH0_DOMAIN}/`,
-      algorithms: ['RS256']
-    },
-    validateFunc: validateUser
-  });
-
+server.register(inert, (err) => {
 	server.route({
 		method: 'GET',
 		path: '/',
