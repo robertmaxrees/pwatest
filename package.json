@@ -14,10 +14,15 @@
   },
   "homepage": "https://github.com/robertmaxrees/pwatest#readme",
   "dependencies": {
-    "hapi": "^16.1.1",
-    "inert": "^4.2.0",
+    "@hapi/hapi": "^18.3.1",
+    "@hapi/inert": "^5.2.1",
+    "@hapi/wreck": "^15.0.1",
+    "@hapi/yar": "^9.2.0",
+    "hapi": "^18.1.0",
+    "inert": "^5.1.3",
+    "web": "0.0.2",
     "web-push": "^3.2.2",
-    "wreck": "^12.1.0",
+    "wreck": "^14.2.0",
     "yar": "^8.1.2"
   }
 }
