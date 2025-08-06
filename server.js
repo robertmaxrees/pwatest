@@ -1,11 +1,12 @@
 const Path = require('path'),
-	Hapi = require('hapi'),
-	wreck = require('wreck'),
+	Hapi = require('@hapi/hapi'),
+	wreck = require('@hapi/wreck'),
 	webPush = require('web-push');
 
 const fcmEndpointURL = 'https://fcm.googleapis.com/fcm/send';
 
-webPush.setGCMAPIKey(process.env.fcmapikey);
+//webPush.setGCMAPIKey(process.env.fcmapikey);
+webPush.setGCMAPIKey('AAAA_L8lXrE:APA91bEuAsknPYIcYrcoL8JyjYH51WG1O_wEUrZjkGKzbjrFJVMbl3XldrNCH_MACSHI6rK_OtjGeOoojrSqo-ltdVk19CKwnTksN_v9EHEIyEsP79HWoLAcpyEHAaht0De_IHicZzsV');
 
 const server = new Hapi.Server({
 	connections: {
